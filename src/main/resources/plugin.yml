@@ -1,0 +1,15 @@
+name: Untitled
+version: @version@
+main: com.konara.plugin.Untitled
+api-version: 1.16
+prefix: Konara's Plugin
+authors: [Konara]
+description: nothing.......
+website: konara.moe
+
+commands:
+  restartbot:
+    description: To restart the QQ bot.
+    usage: /restartbot
+    permission: Untitled.restartbot
+    permission-message: You don't have <permission>

@@ -1,0 +1,50 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.21'
+}
+
+group = 'com.konara'
+version = '1.0-SNAPSHOT'
+
+shadowJar {
+    archiveBaseName.set('Untitled')
+    archiveVersion.set('Alpha-1.0.0')
+}
+
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+    maven {
+        name = 'spigotmc-repo'
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+    }
+    maven {
+        name = 'sonatype'
+        url = 'https://oss.sonatype.org/content/groups/public/'
+    }
+    maven { url 'http://maven.aliyun.com/repositories/public'}
+    maven { url 'http://maven.aliyun.com/repositories/central'}
+}
+
+dependencies {
+    compileOnly 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
+    def miraiVersion = "2.4.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    api "net.mamoe:mirai-core-api:$miraiVersion"
+    runtimeOnly "net.mamoe:mirai-core:$miraiVersion"
+}
+
+processResources {
+    from(sourceSets.main.resources.srcDirs) {
+        filter ReplaceTokens, tokens: [version: version]
+    }
+}
