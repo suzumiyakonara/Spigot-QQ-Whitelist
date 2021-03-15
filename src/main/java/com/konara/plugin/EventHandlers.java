@@ -17,7 +17,7 @@ public class EventHandlers extends SimpleListenerHost {
     public void onMessage(@NotNull MessageEvent event) throws Exception { // 抛出任何异常, 将在 handleException 处理
         long sender=event.getSender().getId();
 		//以下或运算中为有权限的QQ号
-        if(sender==2803530989L||sender==2803530989L||sender==2803530989L)
+        if(sender==2803530123L||sender==2803530124L||sender==2803530125L)
         {
             //event.getSender().sendMessage(event.getMessage().contentToString().substring(0,keyword.length()));
             if(event.getMessage().contentToString().length()>=keyword.length()+1)
@@ -27,6 +27,11 @@ public class EventHandlers extends SimpleListenerHost {
                     Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "whitelist add " + playername);
                     event.getSender().sendMessage("Added "+ playername +" to the whitelist.");
                 }
-        }
+             if((event.getMessage().contentToString().substring(0,1)).equals("/"))
+             {
+                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),event.getMessage().contentToString().substring(1));
+                    event.getSender().sendMessage("The command is executed. ");
+             }
+         }
     }
 }
